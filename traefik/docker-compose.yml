@@ -6,7 +6,7 @@ services:
     restart: always
     command: tunnel run
     environment:
-      - TUNNEL_TOKEN=<YOUR TUNNEL TOKEN>
+      - TUNNEL_TOKEN=${cf_tunnel_token}
     networks:
       - cftunnel-transport
 
@@ -27,3 +27,7 @@ networks:
   cftunnel-transport:
   cloudflaretunnel:
     external: true
+
+secrets:
+  cf_tunnel_token:
+    file: ./cf_tunnel_token.txt
