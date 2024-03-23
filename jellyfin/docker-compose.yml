@@ -1,0 +1,36 @@
+jellyfin:
+  image: lscr.io/linuxserver/jellyfin:latest
+  container_name: jellyfin
+  restart: always
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Berlin
+  volumes:
+    - /storage/.config/jf_config:/config
+    - /storage/Filme/:/data/movies
+    - /storage/Serien/:/data/series
+  runtime: nvidia
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - capabilities: [gpu]
+  ports:
+    - 8096:8096
+    - 8920:8920 #optional
+    - 7359:7359/udp #optional
+    - 1900:1900/udp #optional
+  labels:
+    - traefik.enable=true
+    - traefik.http.routers.whoami.rule=Host(`jf.janschaeffer.dev`)
+    - traefik.http.routers.whoami.entrypoints=websecure
+    - traefik.http.routers.whoami.tls=true
+    - traefik.http.routers.whoami.service=whoami
+    - traefik.http.services.whoami.loadbalancer.server.port=80
+  networks:
+    - cloudflaretunnel
+
+networks:
+  cloudflaretunnel:
+    external: true

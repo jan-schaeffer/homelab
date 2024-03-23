@@ -1,0 +1,26 @@
+nextcloud:
+  image: lscr.io/linuxserver/nextcloud:latest
+  container_name: nextcloud
+  restart: always
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/London
+  volumes:
+    - /storage/.config/nextcloud:/config
+    - /storage/nextcloud:/data
+  ports:
+    - 444:443
+  labels:
+    - traefik.enable=true
+    - traefik.http.routers.whoami.rule=Host(`nc.janschaeffer.dev`)
+    - traefik.http.routers.whoami.entrypoints=websecure
+    - traefik.http.routers.whoami.tls=true
+    - traefik.http.routers.whoami.service=whoami
+    - traefik.http.services.whoami.loadbalancer.server.port=80
+  networks:
+    - cloudflaretunnel
+
+networks:
+  cloudflaretunnel:
+    external: true

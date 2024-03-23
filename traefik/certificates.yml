@@ -2,10 +2,10 @@ tls:
   stores:
     default:
       defaultCertificate:
-        certFile: /origin-certificates/mydomain.tld.pem
-        keyFile: /origin-certificates/mydomain.tld.key
+        certFile: /origin-certificates/janschaeffer.dev.pem
+        keyFile: /origin-certificates/janschaeffer.dev.key
 
   certificates:
-    - certFile: /origin-certificates/mydomain.tld.pem
-      keyFile: /origin-certificates/mydomain.tld.key
+    - certFile: /origin-certificates/janschaeffer.dev.pem
+      keyFile: /origin-certificates/janschaeffer.dev.key
 
