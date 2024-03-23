@@ -14,11 +14,11 @@ services:
       - 444:443
     labels:
       - traefik.enable=true
-      - traefik.http.routers.whoami.rule=Host(`nc.janschaeffer.dev`)
-      - traefik.http.routers.whoami.entrypoints=websecure
-      - traefik.http.routers.whoami.tls=true
-      - traefik.http.routers.whoami.service=whoami
-      - traefik.http.services.whoami.loadbalancer.server.port=80
+      - traefik.http.routers.nextcloud.rule=Host(`nc.janschaeffer.dev`)
+      - traefik.http.routers.nextcloud.entrypoints=websecure
+      - traefik.http.routers.nextcloud.tls=true
+      - traefik.http.routers.nextcloud.service=nextcloud
+      - traefik.http.services.nextcloud.loadbalancer.server.port=80
     networks:
       - cloudflaretunnel
 
